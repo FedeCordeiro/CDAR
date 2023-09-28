@@ -289,13 +289,13 @@ node n17 {
 	hostname ServerA
 	!
 	interface eth0
-	 ip address 10.0.4.10/24
 	 ipv6 address 2001:4::10/64
+	 ip address 10.1.3.2/27
 	!
     }
     canvas c1
-    iconcoords {344.0 574.0}
-    labelcoords {344.0 606.0}
+    iconcoords {344.0 573.0}
+    labelcoords {344.0 605.0}
     interface-peer {eth0 n11}
 }
 
@@ -306,7 +306,7 @@ node n18 {
 	hostname PC1
 	!
 	interface eth0
-	 ip address 10.0.5.20/24
+	 ip address 10.1.1.2/24
 	!
     }
     canvas c1
@@ -322,12 +322,12 @@ node n19 {
 	hostname PC2
 	!
 	interface eth0
-	 ip address 10.0.5.21/24
+	 ip address 10.1.1.3/24
 	!
     }
     canvas c1
-    iconcoords {155.0 660.0}
-    labelcoords {155.0 692.0}
+    iconcoords {140.33333333333334 619.0}
+    labelcoords {140.33333333333334 651.0}
     interface-peer {eth0 n12}
 }
 
