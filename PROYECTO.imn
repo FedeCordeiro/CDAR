@@ -18,6 +18,14 @@ node n1 {
     labelcoords {326.0 77.0}
     interface-peer {eth0 n2}
     interface-peer {eth1 n3}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 201.0.1.1/24 up', 'ifconfig eth1 201.0.2.1/24 up', 'ip route del 10.2.4.128/26', 'ip route del 10.2.4.0/25', 'ip route del 10.2.4.192/27', 'ip route del 10.2.4.224/30', 'ip route del 10.2.5.128/26', 'ip route del 10.2.5.192/28', 'ip route del 192.168.10.0/24', 'ip route add 192.168.10.0/24 via 201.0.1.2 dev eth0', 'ip route add 10.2.0.0/19 via 201.0.2.2 dev eth1', )
+	}
+    }
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n2 {
@@ -36,11 +44,19 @@ node n2 {
 	!
     }
     canvas c1
-    iconcoords {601.0 44.0}
-    labelcoords {601.0 76.0}
+    iconcoords {601.0 43.0}
+    labelcoords {601.0 75.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n29}
     custom-image /usr/local/share/core/icons/normal/router_green.gif
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 201.0.1.2/24 up', 'ifconfig eth1 192.168.10.1/24 up', 'ip route del 10.2.0.0/19', 'ip route add default via 201.0.1.1 dev eth0', )
+	}
+    }
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n3 {
@@ -63,6 +79,14 @@ node n3 {
     labelcoords {222.0 146.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n26}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 201.0.2.2/24 up', 'ifconfig eth1 10.2.0.1/23 up', 'ip route del 10.2.4.128/26', 'ip route del 10.2.4.0/25', 'ip route del 10.2.4.192/27', 'ip route del 10.2.4.224/30', 'ip route del 10.2.5.0/25', 'ip route del 10.2.5.128/26', 'ip route del 10.2.5.192/28', 'ip route del 192.168.10.0/24', 'ip route del 201.0.1.0/24', 'ip route add default via 201.0.2.1 dev eth0', 'ip route add 10.2.2.0/23 via 10.2.0.2 dev eth1', )
+	}
+    }
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n4 {
@@ -85,6 +109,14 @@ node n4 {
     labelcoords {272.0 322.0}
     interface-peer {eth1 n25}
     interface-peer {eth0 n26}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.0.2/23 up', 'ifconfig eth1 10.2.2.1/23 up', 'ip route add default via 10.2.0.1 dev eth0', )
+	}
+    }
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n5 {
@@ -107,6 +139,14 @@ node n5 {
     labelcoords {613.0 322.0}
     interface-peer {eth0 n26}
     interface-peer {eth1 n25}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.0.3/23 up', 'ifconfig eth1 10.2.2.2/23 up', 'ip route add default via 10.2.0.1 dev eth0', )
+	}
+    }
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n6 {
@@ -139,6 +179,14 @@ node n6 {
     interface-peer {eth2 n21}
     interface-peer {eth3 n22}
     interface-peer {eth0 n25}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.2.3/23 up', 'ifconfig eth1 10.2.4.225/30 up', 'ifconfig eth2 10.2.4.129/26 up', 'ifconfig eth3 10.2.4.193/27 up', 'ip route add 10.2.4.0/25 via 10.2.4.226 dev eth1', 'ip route add default via 10.2.2.2 dev eth0', )
+	}
+    }
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n7 {
@@ -171,6 +219,14 @@ node n7 {
     interface-peer {eth2 n27}
     interface-peer {eth3 n23}
     interface-peer {eth0 n25}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.2.4/23 up', 'ifconfig eth1 10.2.5.1/25 up', 'ifconfig eth2 10.2.5.193/28 up', 'ifconfig eth3 10.2.5.129/26 up', 'ip route add default via 10.2.2.2 dev eth0', )
+	}
+    }
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n8 {
@@ -194,6 +250,14 @@ node n8 {
     interface-peer {eth0 n6}
     interface-peer {eth1 n28}
     custom-image /usr/local/share/core/icons/normal/router_green.gif
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.4.226/30 up', 'ifconfig eth1 10.2.4.1/25 up', 'ip route add default via 10.2.4.225 dev eth0', )
+	}
+    }
+    services {OSPFv2 OSPFv3 zebra IPForward UserDefined}
 }
 
 node n10 {
@@ -211,6 +275,14 @@ node n10 {
     iconcoords {612.0 140.0}
     labelcoords {612.0 172.0}
     interface-peer {eth0 n26}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.0.11/23 up', )
+	}
+    }
+    services {DefaultRoute SSH UserDefined}
 }
 
 node n11 {
@@ -228,6 +300,14 @@ node n11 {
     iconcoords {665.0 207.0}
     labelcoords {665.0 239.0}
     interface-peer {eth0 n26}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.0.12/23 up', )
+	}
+    }
+    services {DefaultRoute SSH UserDefined}
 }
 
 node n12 {
@@ -245,6 +325,14 @@ node n12 {
     iconcoords {379.0 633.0}
     labelcoords {379.0 665.0}
     interface-peer {eth0 n22}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.4.194/27 up', )
+	}
+    }
+    services {DefaultRoute SSH UserDefined}
 }
 
 node n13 {
@@ -259,9 +347,17 @@ node n13 {
 	!
     }
     canvas c1
-    iconcoords {503.0 633.0}
-    labelcoords {503.0 665.0}
+    iconcoords {503.0 632.0}
+    labelcoords {503.0 664.0}
     interface-peer {eth0 n23}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.5.130/26 up', )
+	}
+    }
+    services {DefaultRoute SSH UserDefined}
 }
 
 node n14 {
@@ -276,9 +372,17 @@ node n14 {
 	!
     }
     canvas c1
-    iconcoords {43.0 600.0}
-    labelcoords {43.0 632.0}
+    iconcoords {43.0 599.0}
+    labelcoords {43.0 631.0}
     interface-peer {eth0 n21}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.4.130/26 up', )
+	}
+    }
+    services {DefaultRoute UserDefined}
 }
 
 node n15 {
@@ -296,6 +400,14 @@ node n15 {
     iconcoords {125.0 639.0}
     labelcoords {125.0 671.0}
     interface-peer {eth0 n21}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.4.131/26 up', )
+	}
+    }
+    services {DefaultRoute UserDefined}
 }
 
 node n16 {
@@ -313,6 +425,14 @@ node n16 {
     iconcoords {277.0 656.0}
     labelcoords {277.0 688.0}
     interface-peer {eth0 n28}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.4.20/25 up', )
+	}
+    }
+    services {DefaultRoute UserDefined}
 }
 
 node n17 {
@@ -327,9 +447,17 @@ node n17 {
 	!
     }
     canvas c1
-    iconcoords {824.0 605.0}
-    labelcoords {823.0 641.0}
+    iconcoords {824.0 604.0}
+    labelcoords {823.0 640.0}
     interface-peer {eth0 n27}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.5.194/28 up', )
+	}
+    }
+    services {DefaultRoute UserDefined}
 }
 
 node n18 {
@@ -347,6 +475,14 @@ node n18 {
     iconcoords {930.0 637.0}
     labelcoords {930.0 669.0}
     interface-peer {eth0 n27}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.5.195/28 up', )
+	}
+    }
+    services {DefaultRoute UserDefined}
 }
 
 node n19 {
@@ -364,6 +500,14 @@ node n19 {
     iconcoords {633.0 663.0}
     labelcoords {633.0 695.0}
     interface-peer {eth0 n24}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.5.2/25 up', )
+	}
+    }
+    services {DefaultRoute UserDefined}
 }
 
 node n20 {
@@ -381,6 +525,14 @@ node n20 {
     iconcoords {754.0 675.0}
     labelcoords {754.0 707.0}
     interface-peer {eth0 n24}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 10.2.5.3/25 up', )
+	}
+    }
+    services {DefaultRoute UserDefined}
 }
 
 node n21 {
@@ -404,8 +556,8 @@ node n22 {
 	!
     }
     canvas c1
-    iconcoords {376.0 513.0}
-    labelcoords {376.0 504.0}
+    iconcoords {378.0 511.0}
+    labelcoords {378.0 502.0}
     interface-peer {e0 n6}
     interface-peer {e1 n12}
 }
@@ -440,7 +592,7 @@ node n24 {
 node n25 {
     type lanswitch
     network-config {
-	hostname n25
+	hostname SW2
 	!
     }
     canvas c1
@@ -560,9 +712,17 @@ node n9 {
 	!
     }
     canvas c1
-    iconcoords {852.0 39.0}
-    labelcoords {852.0 71.0}
+    iconcoords {856.0 44.0}
+    labelcoords {856.0 76.0}
     interface-peer {eth0 n29}
+    custom-config {
+	custom-config-id service:UserDefined
+	custom-command UserDefined
+	config {
+	cmdup=('ifconfig eth0 192.168.10.2/24 up', )
+	}
+    }
+    services {DefaultRoute UserDefined}
 }
 
 link l1 {
@@ -768,7 +928,7 @@ annotation a5 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #ffffff
     width 1
     border black
@@ -782,7 +942,7 @@ annotation a6 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #ffffff
     width 1
     border black
@@ -903,7 +1063,7 @@ annotation a17 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #b1e8ff
     width 0
     border black
@@ -934,7 +1094,7 @@ annotation a20 {
     label {10.2.4.0/24}
     labelcolor black
     fontfamily {Arial}
-    fontsize 11
+    fontsize {11}
     canvas c1
 }
 
@@ -958,7 +1118,7 @@ annotation a23 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #c0c0ff
     width 0
     border black
@@ -972,7 +1132,7 @@ annotation a25 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #C0C0FF
     width 0
     border black
@@ -986,7 +1146,7 @@ annotation a26 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #C0C0FF
     width 0
     border black
@@ -1000,7 +1160,7 @@ annotation a27 {
     label {SUBRED B}
     labelcolor black
     fontfamily {Arial}
-    fontsize 11
+    fontsize {11}
     effects {bold}
     canvas c1
 }
@@ -1011,7 +1171,7 @@ annotation a28 {
     label {10.2.4.128/26}
     labelcolor black
     fontfamily {Arial}
-    fontsize 10
+    fontsize {10}
     canvas c1
 }
 
@@ -1028,7 +1188,7 @@ annotation a30 {
     label {SUBRED D}
     labelcolor black
     fontfamily {Arial}
-    fontsize 11
+    fontsize {11}
     effects {bold}
     canvas c1
 }
@@ -1039,7 +1199,7 @@ annotation a31 {
     label {SUBRED A}
     labelcolor black
     fontfamily {Arial}
-    fontsize 11
+    fontsize {11}
     effects {bold}
     canvas c1
 }
@@ -1050,7 +1210,7 @@ annotation a32 {
     label {SUBRED C}
     labelcolor black
     fontfamily {Arial}
-    fontsize 11
+    fontsize {11}
     effects {bold}
     canvas c1
 }
@@ -1061,7 +1221,7 @@ annotation a33 {
     label {10.2.4.224/30}
     labelcolor black
     fontfamily {Arial}
-    fontsize 10
+    fontsize {10}
     canvas c1
 }
 
@@ -1071,7 +1231,7 @@ annotation a34 {
     label {10.2.4.0/25}
     labelcolor black
     fontfamily {Arial}
-    fontsize 10
+    fontsize {10}
     canvas c1
 }
 
@@ -1081,7 +1241,7 @@ annotation a35 {
     label {10.2.4.192/27}
     labelcolor black
     fontfamily {Arial}
-    fontsize 10
+    fontsize {10}
     canvas c1
 }
 
@@ -1091,7 +1251,7 @@ annotation a24 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #C0C0FF
     width 0
     border black
@@ -1105,7 +1265,7 @@ annotation a36 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #C0C0FF
     width 0
     border black
@@ -1119,7 +1279,7 @@ annotation a37 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #C0C0FF
     width 0
     border black
@@ -1133,7 +1293,7 @@ annotation a38 {
     label {}
     labelcolor black
     fontfamily {Arial}
-    fontsize 12
+    fontsize {12}
     color #C0C0FF
     width 0
     border black
@@ -1147,7 +1307,7 @@ annotation a39 {
     label {10.2.5.0/24}
     labelcolor black
     fontfamily {Arial}
-    fontsize 11
+    fontsize {11}
     canvas c1
 }
 
@@ -1164,7 +1324,7 @@ annotation a41 {
     label {SUBRED G}
     labelcolor black
     fontfamily {Arial}
-    fontsize 11
+    fontsize {11}
     effects {bold}
     canvas c1
 }
@@ -1175,7 +1335,7 @@ annotation a42 {
     label {SUBRED E}
     labelcolor black
     fontfamily {Arial}
-    fontsize 11
+    fontsize {11}
     effects {bold}
     canvas c1
 }
@@ -1186,7 +1346,7 @@ annotation a43 {
     label {SUBRED F}
     labelcolor black
     fontfamily {Arial}
-    fontsize 11
+    fontsize {11}
     effects {bold}
     canvas c1
 }
@@ -1197,7 +1357,7 @@ annotation a44 {
     label {10.2.5.128/26}
     labelcolor black
     fontfamily {Arial}
-    fontsize 10
+    fontsize {10}
     canvas c1
 }
 
@@ -1207,7 +1367,7 @@ annotation a45 {
     label {10.2.5.0/25}
     labelcolor black
     fontfamily {Arial}
-    fontsize 10
+    fontsize {10}
     canvas c1
 }
 
@@ -1217,7 +1377,7 @@ annotation a46 {
     label {10.2.5.192/28}
     labelcolor black
     fontfamily {Arial}
-    fontsize 10
+    fontsize {10}
     canvas c1
 }
 
