@@ -83,7 +83,7 @@ node n3 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 201.0.2.2/24 up', 'ifconfig eth1 10.2.0.1/23 up', 'ip route add default via 201.0.2.1 dev eth0', 'ip route add 10.2.2.0/19 via 10.2.0.2 dev eth1', )
+	cmdup=('ifconfig eth0 201.0.2.2/24 up', 'ifconfig eth1 10.2.0.1/23 up', 'ip route add default via 201.0.2.1 dev eth0', 'ip route add 10.2.0.0/19 via 10.2.0.2 dev eth1', )
 	}
     }
     services {IPForward UserDefined}
@@ -143,7 +143,7 @@ node n5 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 10.2.0.3/23 up', 'ifconfig eth1 10.2.2.2/23 up', 'ip route add default via 10.2.0.1 dev eth0', 'ip route add 10.2.4.0/24 via 10.2.2.3 dev eth1', )
+	cmdup=('ifconfig eth0 10.2.0.3/23 up', 'ifconfig eth1 10.2.2.2/23 up', 'ip route add default via 10.2.0.1 dev eth0', 'ip route add 10.2.4.0/24 via 10.2.2.3 dev eth1', 'ip route add 10.2.5.0/24 via 10.2.2.4 dev eth1', )
 	}
     }
     services {IPForward UserDefined}
@@ -213,8 +213,8 @@ node n7 {
 	!
     }
     canvas c1
-    iconcoords {629.0 412.0}
-    labelcoords {628.0 398.0}
+    iconcoords {629.0 411.0}
+    labelcoords {628.0 397.0}
     interface-peer {eth1 n24}
     interface-peer {eth2 n27}
     interface-peer {eth3 n23}
@@ -282,7 +282,7 @@ node n10 {
 	cmdup=('ifconfig eth0 10.2.0.11/23 up', 'ip route add default via 10.2.0.1 dev eth0', 'ip route add 10.2.0.0/19 via 10.2.0.2 dev eth0', )
 	}
     }
-    services {DefaultRoute SSH UserDefined}
+    services {IPForward UserDefined}
 }
 
 node n11 {
