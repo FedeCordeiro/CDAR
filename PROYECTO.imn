@@ -14,15 +14,15 @@ node n1 {
 	!
     }
     canvas c1
-    iconcoords {326.0 45.0}
-    labelcoords {326.0 77.0}
+    iconcoords {326.0 44.0}
+    labelcoords {326.0 76.0}
     interface-peer {eth0 n2}
     interface-peer {eth1 n3}
     custom-config {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 201.0.1.1/24 up', 'ifconfig eth1 201.0.2.1/24 up', 'ip route add 192.168.10.0/24 via 201.0.1.2 dev eth0', 'ip route add 10.2.0.0/19 via 201.0.2.2 dev eth1', )
+	cmdup=('ifconfig eth0 201.0.1.1/24 up', 'ifconfig eth1 201.0.2.1/24 up', )
 	}
     }
     services {IPForward UserDefined}
@@ -44,8 +44,8 @@ node n2 {
 	!
     }
     canvas c1
-    iconcoords {601.0 43.0}
-    labelcoords {601.0 75.0}
+    iconcoords {600.0 42.0}
+    labelcoords {600.0 74.0}
     interface-peer {eth0 n1}
     interface-peer {eth1 n29}
     custom-image /usr/local/share/core/icons/normal/router_green.gif
@@ -53,7 +53,7 @@ node n2 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 201.0.1.2/24 up', 'ifconfig eth1 192.168.10.1/24 up', 'ip route add default via 201.0.1.1 dev eth0', 'ip route add 10.2.0.0/19 via 201.0.1.1 dev eth0', )
+	cmdup=('ifconfig eth0 201.0.1.2/24 up', 'ifconfig eth1 192.168.10.1/24 up', 'ip route add default via 201.0.1.1 dev eth0', 'iptables -t nat -A POSTROUTING -o eth0 -s 192.168.10.2 -j MASQUERADE', )
 	}
     }
     services {IPForward UserDefined}
@@ -83,7 +83,7 @@ node n3 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 201.0.2.2/24 up', 'ifconfig eth1 10.2.0.1/23 up', 'ip route add default via 201.0.2.1 dev eth0', 'ip route add 10.2.0.0/19 via 10.2.0.2 dev eth1', )
+	cmdup=('ifconfig eth0 201.0.2.2/24 up', 'ifconfig eth1 10.2.0.1/23 up', 'ip route add default via 201.0.2.1 dev eth0', 'ip route add 10.2.0.0/19 via 10.2.0.2 dev eth1', 'ip route add 10.2.0.0/19 via 10.2.0.3 dev eth1', 'iptables -t filter -A FORWARD -o eth0 -s 10.2.0.0/23 -j ACCEPT', 'iptables -t filter -A FORWARD -o eth0 -s 10.2.4.0/23 -j ACCEPT', 'iptables -t filter -A FORWARD -o eth0 -j DROP', 'iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE', 'iptables -t nat -A PREROUTING -p tcp --dport 80 -i eth0 -j DNAT --to 10.2.0.11:8080', )
 	}
     }
     services {IPForward UserDefined}
@@ -113,7 +113,7 @@ node n4 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 10.2.0.2/23 up', 'ifconfig eth1 10.2.2.1/23 up', 'ip route add default via 10.2.0.1 dev eth0', 'ip route add 10.2.4.0/24 via 10.2.2.3 dev eth1', 'ip route add 10.2.5.0/24 via 10.2.2.4 dev eth1', )
+	cmdup=('ifconfig eth0 10.2.0.2/23 up', 'ifconfig eth1 10.2.2.1/23 up', 'ip route add default via 10.2.0.1 dev eth0', 'ip route add 10.2.4.0/24 via 10.2.2.3 dev eth1', 'ip route add 10.2.5.0/24 via 10.2.2.4 dev eth1', 'iptables -t filter -A FORWARD -d 10.2.0.0/23 -j DROP', )
 	}
     }
     services {IPForward UserDefined}
@@ -143,7 +143,7 @@ node n5 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 10.2.0.3/23 up', 'ifconfig eth1 10.2.2.2/23 up', 'ip route add default via 10.2.0.1 dev eth0', 'ip route add 10.2.4.0/24 via 10.2.2.3 dev eth1', 'ip route add 10.2.5.0/24 via 10.2.2.4 dev eth1', )
+	cmdup=('ifconfig eth0 10.2.0.3/23 up', 'ifconfig eth1 10.2.2.2/23 up', 'ip route add default via 10.2.0.1 dev eth0', 'ip route add 10.2.4.0/24 via 10.2.2.3 dev eth1', 'ip route add 10.2.5.0/24 via 10.2.2.4 dev eth1', 'iptables -t filter -A FORWARD -d 10.2.0.0/23 -j ACCEPT', 'iptables -t filter -A FORWARD -j DROP', )
 	}
     }
     services {IPForward UserDefined}
@@ -183,7 +183,7 @@ node n6 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 10.2.2.3/23 up', 'ifconfig eth1 10.2.4.225/30 up', 'ifconfig eth2 10.2.4.129/26 up', 'ifconfig eth3 10.2.4.193/27 up', 'ip route add 10.2.4.0/25 via 10.2.4.226 dev eth1', 'ip route add default via 10.2.2.2 dev eth0', 'ip route add 10.2.5.0/24 via 10.2.2.4 dev eth0', )
+	cmdup=('ifconfig eth0 10.2.2.3/23 up', 'ifconfig eth1 10.2.4.225/30 up', 'ifconfig eth2 10.2.4.129/26 up', 'ifconfig eth3 10.2.4.193/27 up', 'ip route add 10.2.4.0/25 via 10.2.4.226 dev eth1', 'ip route add 10.2.5.0/24 via 10.2.2.4 dev eth0', 'ip route add 10.2.0.0/23 via 10.2.2.2 dev eth0', 'ip route add default via 10.2.2.1 dev eth0', )
 	}
     }
     services {IPForward UserDefined}
@@ -223,7 +223,7 @@ node n7 {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 10.2.2.4/23 up', 'ifconfig eth1 10.2.5.1/25 up', 'ifconfig eth2 10.2.5.193/28 up', 'ifconfig eth3 10.2.5.129/26 up', 'ip route add default via 10.2.2.2 dev eth0', 'ip route add 10.2.4.0/24 via 10.2.2.3 dev eth0', )
+	cmdup=('ifconfig eth0 10.2.2.4/23 up', 'ifconfig eth1 10.2.5.1/25 up', 'ifconfig eth2 10.2.5.193/28 up', 'ifconfig eth3 10.2.5.129/26 up', 'ip route add 10.2.4.0/24 via 10.2.2.3 dev eth0', 'ip route add 10.2.0.0/23 via 10.2.2.2 dev eth0', 'ip route add default via 10.2.2.1 dev eth0', 'iptables -t filter -A FORWARD -i eth2 -d 10.2.5.0/24 -j ACCEPT', 'iptables -t filter -A FORWARD -o eth0 -i eth2 -d 10.2.0.0/23 -j ACCEPT', 'iptables -t filter -A FORWARD -o eth0 -i eth2 -d 10.2.0.0/19 -j DROP', 'iptables -t filter -A INPUT -i eth2 -d 10.2.2.4 -j DROP', )
 	}
     }
     services {IPForward UserDefined}
@@ -272,14 +272,14 @@ node n10 {
 	!
     }
     canvas c1
-    iconcoords {612.0 140.0}
-    labelcoords {612.0 172.0}
+    iconcoords {612.0 138.0}
+    labelcoords {612.0 170.0}
     interface-peer {eth0 n26}
     custom-config {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 10.2.0.11/23 up', 'ip route add default via 10.2.0.1 dev eth0', 'ip route add 10.2.0.0/19 via 10.2.0.2 dev eth0', )
+	cmdup=('ifconfig eth0 10.2.0.11/23 up', 'ip route add default via 10.2.0.1 dev eth0', 'ip route add 10.2.0.0/19 via 10.2.0.2 dev eth0', 'ip route add 10.2.0.0/19 via 10.2.0.3 dev eth0', )
 	}
     }
     services {IPForward UserDefined}
@@ -297,14 +297,14 @@ node n11 {
 	!
     }
     canvas c1
-    iconcoords {665.0 207.0}
-    labelcoords {665.0 239.0}
+    iconcoords {666.0 207.0}
+    labelcoords {666.0 239.0}
     interface-peer {eth0 n26}
     custom-config {
 	custom-config-id service:UserDefined
 	custom-command UserDefined
 	config {
-	cmdup=('ifconfig eth0 10.2.0.12/23 up', 'ip route add default via  10.2.0.1 dev eth0', 'ip route add 10.2.0.0/19 via 10.2.0.2', )
+	cmdup=('ifconfig eth0 10.2.0.12/23 up', 'ip route add default via  10.2.0.1 dev eth0', 'ip route add 10.2.0.0/19 via 10.2.0.3 dev eth0', 'ip route add 10.2.0.0/19 via 10.2.0.2 dev eth0', )
 	}
     }
     services {IPForward UserDefined}
@@ -909,7 +909,7 @@ annotation a3 {
 }
 
 annotation a4 {
-    iconcoords {186.0 294.0 715.0 409.0}
+    iconcoords {189 298 722 417}
     type rectangle
     label {}
     labelcolor black
@@ -951,7 +951,7 @@ annotation a6 {
 }
 
 annotation a7 {
-    iconcoords {4.0 111.0 985.0 735.0}
+    iconcoords {0 104 987 734}
     type rectangle
     label {}
     labelcolor black
